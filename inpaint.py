@@ -25,7 +25,7 @@ class DemoInpaint:
                 "non_redraw_strength": ("FLOAT", {
                     "default": 0.1, 
                     "min": 0.0, 
-                    "max": 1.0, 
+                    "max": 0.5, 
                     "step": 0.01,
                     "display_name": "非重绘区域强度"
                 }),
@@ -118,6 +118,19 @@ class DemoInpaint:
         )[0]
         samples = result["samples"].to(device)
         
+        
+        # 生成二值化遮罩（0或1）
+        binary_mask = (mask_resized >= 0.5).float()
+        
+        # 构建新遮罩：白区=1.0，黑区保持第一阶段非重绘强度
+        phase2_mask = binary_mask * 1.0 + (1 - binary_mask) * non_redraw_strength
+        
+        # 应用新遮罩到第一阶段输出
+        latent_phase2 = noise_mask.set_mask(
+            {"samples": samples},
+            phase2_mask
+        )[0]
+     
         # === 第二阶段采样 (22-30步) ===
         result = advanced_sampler.sample(
             model=model,
@@ -129,7 +142,8 @@ class DemoInpaint:
             scheduler=scheduler,
             positive=positive_cond,
             negative=negative_cond,
-            latent_image={"samples": samples},
+             # [!] 使用新处理的潜在变量 ------------------
+            latent_image=latent_phase2,
             start_at_step=15,
             end_at_step=30,
             return_with_leftover_noise=False
