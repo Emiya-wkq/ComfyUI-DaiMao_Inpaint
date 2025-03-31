@@ -2,7 +2,8 @@
 万能且清晰的comfyui重绘节点
 # 目前适用于换背景场景，后续会逐步迭代支持全场景。
 ### 使用命令手动安装
-### git clone 
+
+### git clone https://github.com/Emiya-wkq/ComfyUI-DaiMao_Inpaint.git
 
 
 ## 主要目的是为了解决多版本大模型间，切换重绘方案麻烦的问题。
