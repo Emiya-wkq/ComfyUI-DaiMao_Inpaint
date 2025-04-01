@@ -1,6 +1,8 @@
 # ComfyUI-DaiMao_Inpaint
 万能且清晰的comfyui重绘节点
 # 目前适用于换背景场景，后续会逐步迭代支持全场景。
+B站名称：阿尔托呆毛，主页，https://space.bilibili.com/198710986?spm_id_from=333.337.0.0
+
 ### 使用命令手动安装
 
 ### git clone https://github.com/Emiya-wkq/ComfyUI-DaiMao_Inpaint.git
