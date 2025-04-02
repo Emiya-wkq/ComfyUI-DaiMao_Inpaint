@@ -1,6 +1,8 @@
 {
-  "last_node_id": 71,
-  "last_link_id": 143,
+  "id": "6632fb41-08f9-49bf-a882-c103b82c1984",
+  "revision": 0,
+  "last_node_id": 72,
+  "last_link_id": 151,
   "nodes": [
     {
       "id": 4,
@@ -14,38 +16,40 @@
         98
       ],
       "flags": {},
-      "order": 4,
+      "order": 0,
       "mode": 0,
       "inputs": [],
       "outputs": [
         {
+          "label": "MODEL",
           "name": "MODEL",
           "type": "MODEL",
-          "links": [
-            111
-          ],
           "slot_index": 0,
-          "label": "模型"
+          "links": [
+            111,
+            144
+          ]
         },
         {
+          "label": "CLIP",
           "name": "CLIP",
           "type": "CLIP",
+          "slot_index": 1,
           "links": [
             3,
             5
-          ],
-          "slot_index": 1,
-          "label": "CLIP"
+          ]
         },
         {
+          "label": "VAE",
           "name": "VAE",
           "type": "VAE",
+          "slot_index": 2,
           "links": [
             35,
-            112
-          ],
-          "slot_index": 2,
-          "label": "VAE"
+            112,
+            145
+          ]
         }
       ],
       "properties": {
@@ -71,30 +75,30 @@
       "mode": 0,
       "inputs": [
         {
+          "label": "clip",
           "name": "clip",
           "type": "CLIP",
-          "link": 3,
-          "label": "CLIP"
+          "link": 3
         },
         {
+          "label": "text",
           "name": "text",
           "type": "STRING",
-          "link": 118,
           "widget": {
             "name": "text"
           },
-          "label": "文本"
+          "link": 118
         }
       ],
       "outputs": [
         {
+          "label": "CONDITIONING",
           "name": "CONDITIONING",
           "type": "CONDITIONING",
+          "slot_index": 0,
           "links": [
             30
-          ],
-          "slot_index": 0,
-          "label": "条件"
+          ]
         }
       ],
       "properties": {
@@ -117,25 +121,25 @@
         180.6060791015625
       ],
       "flags": {},
-      "order": 9,
+      "order": 6,
       "mode": 0,
       "inputs": [
         {
+          "label": "clip",
           "name": "clip",
           "type": "CLIP",
-          "link": 5,
-          "label": "CLIP"
+          "link": 5
         }
       ],
       "outputs": [
         {
+          "label": "CONDITIONING",
           "name": "CONDITIONING",
           "type": "CONDITIONING",
+          "slot_index": 0,
           "links": [
             31
-          ],
-          "slot_index": 0,
-          "label": "条件"
+          ]
         }
       ],
       "properties": {
@@ -158,33 +162,34 @@
         860.0667114257812
       ],
       "flags": {},
-      "order": 1,
+      "order": 5,
       "mode": 0,
       "inputs": [],
       "outputs": [
         {
+          "label": "IMAGE",
           "name": "IMAGE",
           "type": "IMAGE",
+          "slot_index": 0,
           "links": [
             20,
             82
-          ],
-          "slot_index": 0,
-          "label": "图像"
+          ]
         },
         {
+          "label": "MASK",
           "name": "MASK",
           "type": "MASK",
-          "links": null,
-          "label": "遮罩"
+          "links": null
         }
       ],
       "properties": {
         "Node name for S&R": "LoadImage"
       },
       "widgets_values": [
-        "微信图片_20250227215731.jpg",
-        "image"
+        "ComfyUI_temp_mtgee_00007_.png",
+        "image",
+        ""
       ]
     },
     {
@@ -196,7 +201,7 @@
       ],
       "size": [
         315,
-        338
+        126
       ],
       "flags": {
         "collapsed": true
@@ -205,31 +210,31 @@
       "mode": 0,
       "inputs": [
         {
+          "label": "images",
           "name": "images",
           "type": "IMAGE",
-          "link": 21,
-          "label": "图像"
+          "link": 21
         }
       ],
       "outputs": [
         {
+          "label": "image",
           "name": "image",
           "type": "IMAGE",
+          "slot_index": 0,
           "links": [
             28
-          ],
-          "slot_index": 0,
-          "label": "图像"
+          ]
         },
         {
+          "label": "mask",
           "name": "mask",
           "type": "MASK",
+          "slot_index": 1,
           "links": [
             61,
             90
-          ],
-          "slot_index": 1,
-          "label": "遮罩"
+          ]
         }
       ],
       "properties": {
@@ -256,60 +261,61 @@
       "flags": {
         "collapsed": true
       },
-      "order": 7,
+      "order": 9,
       "mode": 0,
       "inputs": [
         {
+          "label": "image",
           "name": "image",
-          "type": "IMAGE",
-          "link": 20,
           "shape": 7,
-          "label": "图像"
+          "type": "IMAGE",
+          "link": 20
         },
         {
+          "label": "mask",
           "name": "mask",
-          "type": "MASK",
-          "link": null,
           "shape": 7,
-          "label": "遮罩"
+          "type": "MASK",
+          "link": null
         }
       ],
       "outputs": [
         {
+          "label": "image",
           "name": "image",
           "type": "IMAGE",
+          "slot_index": 0,
           "links": [
             21,
             85,
-            113
-          ],
-          "slot_index": 0,
-          "label": "图像"
+            113,
+            146
+          ]
         },
         {
+          "label": "mask",
           "name": "mask",
           "type": "MASK",
-          "links": [],
           "slot_index": 1,
-          "label": "遮罩"
+          "links": []
         },
         {
+          "label": "original_size",
           "name": "original_size",
           "type": "BOX",
-          "links": null,
-          "label": "原始大小"
+          "links": null
         },
         {
+          "label": "width",
           "name": "width",
           "type": "INT",
-          "links": null,
-          "label": "width"
+          "links": null
         },
         {
+          "label": "height",
           "name": "height",
           "type": "INT",
-          "links": null,
-          "label": "height"
+          "links": null
         }
       ],
       "properties": {
@@ -344,55 +350,57 @@
       "mode": 0,
       "inputs": [
         {
+          "label": "positive",
           "name": "positive",
           "type": "CONDITIONING",
-          "link": 30,
-          "label": "正面条件"
+          "link": 30
         },
         {
+          "label": "negative",
           "name": "negative",
           "type": "CONDITIONING",
-          "link": 31,
-          "label": "负面条件"
+          "link": 31
         },
         {
+          "label": "control_net",
           "name": "control_net",
           "type": "CONTROL_NET",
-          "link": 143,
-          "label": "ControlNet"
+          "link": 143
         },
         {
+          "label": "image",
           "name": "image",
           "type": "IMAGE",
-          "link": 29,
-          "label": "图像"
+          "link": 29
         },
         {
+          "label": "vae",
           "name": "vae",
-          "type": "VAE",
-          "link": 35,
           "shape": 7,
-          "label": "vae"
+          "type": "VAE",
+          "link": 35
         }
       ],
       "outputs": [
         {
+          "label": "positive",
           "name": "positive",
           "type": "CONDITIONING",
-          "links": [
-            115
-          ],
           "slot_index": 0,
-          "label": "正面条件"
+          "links": [
+            115,
+            148
+          ]
         },
         {
+          "label": "negative",
           "name": "negative",
           "type": "CONDITIONING",
-          "links": [
-            116
-          ],
           "slot_index": 1,
-          "label": "负面条件"
+          "links": [
+            116,
+            149
+          ]
         }
       ],
       "properties": {
@@ -416,18 +424,18 @@
         58
       ],
       "flags": {},
-      "order": 0,
+      "order": 1,
       "mode": 0,
       "inputs": [],
       "outputs": [
         {
+          "label": "CONTROL_NET",
           "name": "CONTROL_NET",
           "type": "CONTROL_NET",
+          "slot_index": 0,
           "links": [
             26
-          ],
-          "slot_index": 0,
-          "label": "ControlNet"
+          ]
         }
       ],
       "properties": {
@@ -449,23 +457,23 @@
         58
       ],
       "flags": {},
-      "order": 6,
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
+          "label": "control_net",
           "name": "control_net",
           "type": "CONTROL_NET",
-          "link": 26,
-          "label": "ControlNet"
+          "link": 26
         }
       ],
       "outputs": [
         {
+          "label": "CONTROL_NET",
           "name": "CONTROL_NET",
           "type": "CONTROL_NET",
-          "links": [],
           "slot_index": 0,
-          "label": "ControlNet"
+          "links": []
         }
       ],
       "properties": {
@@ -491,21 +499,21 @@
       "mode": 0,
       "inputs": [
         {
+          "label": "image",
           "name": "image",
           "type": "IMAGE",
-          "link": 28,
-          "label": "图像"
+          "link": 28
         }
       ],
       "outputs": [
         {
+          "label": "IMAGE",
           "name": "IMAGE",
           "type": "IMAGE",
+          "slot_index": 0,
           "links": [
             29
-          ],
-          "slot_index": 0,
-          "label": "图像"
+          ]
         }
       ],
       "properties": {
@@ -533,21 +541,21 @@
       "mode": 0,
       "inputs": [
         {
+          "label": "mask",
           "name": "mask",
           "type": "MASK",
-          "link": 61,
-          "label": "遮罩"
+          "link": 61
         }
       ],
       "outputs": [
         {
+          "label": "MASK",
           "name": "MASK",
           "type": "MASK",
+          "slot_index": 0,
           "links": [
             64
-          ],
-          "slot_index": 0,
-          "label": "遮罩"
+          ]
         }
       ],
       "properties": {
@@ -571,21 +579,22 @@
       "mode": 0,
       "inputs": [
         {
+          "label": "mask",
           "name": "mask",
           "type": "MASK",
-          "link": 64,
-          "label": "遮罩"
+          "link": 64
         }
       ],
       "outputs": [
         {
+          "label": "MASK",
           "name": "MASK",
           "type": "MASK",
-          "links": [
-            114
-          ],
           "slot_index": 0,
-          "label": "遮罩"
+          "links": [
+            114,
+            147
+          ]
         }
       ],
       "properties": {
@@ -612,18 +621,18 @@
       "mode": 0,
       "inputs": [
         {
+          "dir": 3,
+          "label": "image_a",
           "name": "image_a",
           "type": "IMAGE",
-          "link": 92,
-          "label": "图像_A",
-          "dir": 3
+          "link": 92
         },
         {
+          "dir": 3,
+          "label": "image_b",
           "name": "image_b",
           "type": "IMAGE",
-          "link": 82,
-          "label": "图像_B",
-          "dir": 3
+          "link": 82
         }
       ],
       "outputs": [],
@@ -663,41 +672,41 @@
       "mode": 0,
       "inputs": [
         {
+          "label": "background_image",
           "name": "background_image",
           "type": "IMAGE",
-          "link": 117,
-          "label": "背景图像"
+          "link": 150
         },
         {
+          "label": "layer_image",
           "name": "layer_image",
           "type": "IMAGE",
-          "link": 85,
-          "label": "图像层"
+          "link": 85
         },
         {
+          "label": "layer_mask",
           "name": "layer_mask",
-          "type": "MASK",
-          "link": 91,
           "shape": 7,
-          "label": "遮罩层"
+          "type": "MASK",
+          "link": 91
         }
       ],
       "outputs": [
         {
+          "label": "image",
           "name": "image",
           "type": "IMAGE",
+          "slot_index": 0,
           "links": [
             87,
             92
-          ],
-          "slot_index": 0,
-          "label": "图像"
+          ]
         },
         {
+          "label": "mask",
           "name": "mask",
           "type": "MASK",
-          "links": null,
-          "label": "遮罩"
+          "links": null
         }
       ],
       "properties": {
@@ -734,10 +743,10 @@
       "mode": 0,
       "inputs": [
         {
+          "label": "images",
           "name": "images",
           "type": "IMAGE",
-          "link": 87,
-          "label": "图像"
+          "link": 87
         }
       ],
       "outputs": [],
@@ -764,27 +773,27 @@
       "mode": 0,
       "inputs": [
         {
+          "label": "mask",
           "name": "mask",
           "type": "MASK",
-          "link": 90,
-          "label": "遮罩"
+          "link": 90
         }
       ],
       "outputs": [
         {
+          "label": "mask",
           "name": "mask",
           "type": "MASK",
+          "slot_index": 0,
           "links": [
             91
-          ],
-          "slot_index": 0,
-          "label": "遮罩"
+          ]
         },
         {
+          "label": "mask_inverted",
           "name": "mask_inverted",
           "type": "MASK",
-          "links": null,
-          "label": "反转遮罩"
+          "links": null
         }
       ],
       "properties": {
@@ -813,18 +822,18 @@
         58
       ],
       "flags": {},
-      "order": 5,
+      "order": 2,
       "mode": 0,
       "inputs": [],
       "outputs": [
         {
+          "label": "CONTROL_NET",
           "name": "CONTROL_NET",
           "type": "CONTROL_NET",
+          "slot_index": 0,
           "links": [
             143
-          ],
-          "slot_index": 0,
-          "label": "ControlNet"
+          ]
         }
       ],
       "properties": {
@@ -851,11 +860,11 @@
       "inputs": [],
       "outputs": [
         {
+          "label": "CONTROL_NET",
           "name": "CONTROL_NET",
           "type": "CONTROL_NET",
-          "links": [],
           "slot_index": 0,
-          "label": "ControlNet"
+          "links": []
         }
       ],
       "properties": {
@@ -863,82 +872,6 @@
       },
       "widgets_values": [
         "SD1.5原始模型/control_v11p_sd15_canny.pth"
-      ]
-    },
-    {
-      "id": 69,
-      "type": "呆毛Demo_Inpaint",
-      "pos": [
-        651.6848754882812,
-        365.832275390625
-      ],
-      "size": [
-        315,
-        490
-      ],
-      "flags": {},
-      "order": 16,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "model",
-          "type": "MODEL",
-          "link": 111,
-          "label": "model"
-        },
-        {
-          "name": "vae",
-          "type": "VAE",
-          "link": 112,
-          "label": "vae"
-        },
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 113,
-          "label": "image"
-        },
-        {
-          "name": "mask",
-          "type": "MASK",
-          "link": 114,
-          "label": "mask"
-        },
-        {
-          "name": "positive_cond",
-          "type": "CONDITIONING",
-          "link": 115,
-          "label": "positive_cond"
-        },
-        {
-          "name": "negative_cond",
-          "type": "CONDITIONING",
-          "link": 116,
-          "label": "negative_cond"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            117,
-            120
-          ],
-          "slot_index": 0,
-          "label": "IMAGE"
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "呆毛Demo_Inpaint"
-      },
-      "widgets_values": [
-        7,
-        0.1,
-        0.9,
-        "enable",
-        318831732769537,
-        "randomize"
       ]
     },
     {
@@ -953,18 +886,18 @@
         200
       ],
       "flags": {},
-      "order": 2,
+      "order": 4,
       "mode": 0,
       "inputs": [],
       "outputs": [
         {
+          "label": "text",
           "name": "text",
           "type": "STRING",
+          "slot_index": 0,
           "links": [
             118
-          ],
-          "slot_index": 0,
-          "label": "文本"
+          ]
         }
       ],
       "properties": {
@@ -993,10 +926,10 @@
       "mode": 0,
       "inputs": [
         {
+          "label": "images",
           "name": "images",
           "type": "IMAGE",
-          "link": 120,
-          "label": "图像"
+          "link": 151
         }
       ],
       "outputs": [],
@@ -1004,6 +937,84 @@
         "Node name for S&R": "PreviewImage"
       },
       "widgets_values": []
+    },
+    {
+      "id": 72,
+      "type": "呆毛Demo_Inpainting",
+      "pos": [
+        653.11962890625,
+        378.4045104980469
+      ],
+      "size": [
+        315,
+        538
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 144
+        },
+        {
+          "label": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 145
+        },
+        {
+          "label": "image",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 146
+        },
+        {
+          "label": "mask",
+          "name": "mask",
+          "type": "MASK",
+          "link": 147
+        },
+        {
+          "label": "positive_cond",
+          "name": "positive_cond",
+          "type": "CONDITIONING",
+          "link": 148
+        },
+        {
+          "label": "negative_cond",
+          "name": "negative_cond",
+          "type": "CONDITIONING",
+          "link": 149
+        }
+      ],
+      "outputs": [
+        {
+          "label": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            150,
+            151
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "呆毛Demo_Inpainting"
+      },
+      "widgets_values": [
+        1,
+        0.1,
+        0.9,
+        30,
+        true,
+        "disable",
+        854584414859162,
+        "randomize",
+        ""
+      ]
     }
   ],
   "links": [
@@ -1152,62 +1163,6 @@
       "IMAGE"
     ],
     [
-      111,
-      4,
-      0,
-      69,
-      0,
-      "MODEL"
-    ],
-    [
-      112,
-      4,
-      2,
-      69,
-      1,
-      "VAE"
-    ],
-    [
-      113,
-      18,
-      0,
-      69,
-      2,
-      "IMAGE"
-    ],
-    [
-      114,
-      42,
-      0,
-      69,
-      3,
-      "MASK"
-    ],
-    [
-      115,
-      20,
-      0,
-      69,
-      4,
-      "CONDITIONING"
-    ],
-    [
-      116,
-      20,
-      1,
-      69,
-      5,
-      "CONDITIONING"
-    ],
-    [
-      117,
-      69,
-      0,
-      48,
-      0,
-      "IMAGE"
-    ],
-    [
       118,
       70,
       0,
@@ -1216,20 +1171,76 @@
       "STRING"
     ],
     [
-      120,
-      69,
-      0,
-      71,
-      0,
-      "IMAGE"
-    ],
-    [
       143,
       51,
       0,
       20,
       2,
       "CONTROL_NET"
+    ],
+    [
+      144,
+      4,
+      0,
+      72,
+      0,
+      "MODEL"
+    ],
+    [
+      145,
+      4,
+      2,
+      72,
+      1,
+      "VAE"
+    ],
+    [
+      146,
+      18,
+      0,
+      72,
+      2,
+      "IMAGE"
+    ],
+    [
+      147,
+      42,
+      0,
+      72,
+      3,
+      "MASK"
+    ],
+    [
+      148,
+      20,
+      0,
+      72,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      149,
+      20,
+      1,
+      72,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      150,
+      72,
+      0,
+      48,
+      0,
+      "IMAGE"
+    ],
+    [
+      151,
+      72,
+      0,
+      71,
+      0,
+      "IMAGE"
     ]
   ],
   "groups": [
@@ -1276,10 +1287,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.544500000000034,
+      "scale": 0.45000000000000023,
       "offset": [
-        1692.9896039887406,
-        165.85357052659032
+        1179.6276226098691,
+        231.71727161031157
       ]
     },
     "ue_links": []
