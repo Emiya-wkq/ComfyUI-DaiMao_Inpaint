@@ -44,6 +44,11 @@ class DemoInpaint:
                     "step": 1,
                     "display_name": "总步数"
                 }),
+                # 修改画质修复参数为布尔值
+                "quality_fix": ("BOOLEAN", {
+                    "default": True,
+                    "display_name": "画质修复"
+                }),
                 # 新增用户选择参数
                 "use_flux_config": (["enable", "disable"], {
                     "default": "disable",
@@ -58,7 +63,7 @@ class DemoInpaint:
     CATEGORY = "custom_nodes"
 
     def execute(self, model, vae, image, mask, positive_cond, negative_cond,
-                non_redraw_strength, redraw_strength, steps, seed, cfg, use_flux_config):
+                non_redraw_strength, redraw_strength, steps, quality_fix, seed, cfg, use_flux_config):
         
         # 固定参数设置
         sampler_name = 0  # euler
@@ -163,20 +168,22 @@ class DemoInpaint:
         samples = result["samples"].to(device)
         
         # === 最终微调采样 ===
-        sampler = KSampler()
-        result = sampler.sample(
-            model,
-            seed + 2,
-            5,
-            cfg,
-            sampler_name,
-            scheduler,
-            positive_cond,
-            negative_cond,
-            {"samples": samples},
-            0.1
-        )[0]
-        samples = result["samples"].to(device)
+        # 根据画质修复参数决定是否执行
+        if quality_fix:  # 直接使用布尔值判断
+            sampler = KSampler()
+            result = sampler.sample(
+                model,
+                seed + 2,
+                5,
+                cfg,
+                sampler_name,
+                scheduler,
+                positive_cond,
+                negative_cond,
+                {"samples": samples},
+                0.1
+            )[0]
+            samples = result["samples"].to(device)
         
         # 解码潜在空间到图像
         from nodes import VAEDecode
