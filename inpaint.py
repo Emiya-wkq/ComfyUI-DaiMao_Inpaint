@@ -36,6 +36,14 @@ class DemoInpaint:
                     "step": 0.01,
                     "display_name": "重绘区域强度"
                 }),
+                # 新增步数参数
+                "steps": ("INT", {
+                    "default": 30, 
+                    "min": 1, 
+                    "max": 100, 
+                    "step": 1,
+                    "display_name": "总步数"
+                }),
                 # 新增用户选择参数
                 "use_flux_config": (["enable", "disable"], {
                     "default": "disable",
@@ -50,12 +58,16 @@ class DemoInpaint:
     CATEGORY = "custom_nodes"
 
     def execute(self, model, vae, image, mask, positive_cond, negative_cond,
-                non_redraw_strength, redraw_strength, seed, cfg, use_flux_config):
+                non_redraw_strength, redraw_strength, steps, seed, cfg, use_flux_config):
         
         # 固定参数设置
         sampler_name = 0  # euler
         scheduler = 3     # 调度器类型
-        total_steps = 30
+        
+        # 计算每个阶段的步数（向上取整）
+        import math
+        phase1_steps = math.ceil(steps / 2)
+        phase2_steps = steps - phase1_steps
         
         # 获取设备
         device = model.model.device if hasattr(model, 'model') else model.device
@@ -100,12 +112,12 @@ class DemoInpaint:
         # 三阶段采样流程
         advanced_sampler = KSamplerAdvanced()
         
-        # === 第一阶段采样 (0-22步) ===
+        # === 第一阶段采样 (使用 phase1_steps) ===
         result = advanced_sampler.sample(
             model=model,
             add_noise=0.00,
             noise_seed=seed,
-            steps=total_steps,
+            steps=steps,  # 总步数
             cfg=cfg,
             sampler_name=sampler_name,
             scheduler=scheduler,
@@ -113,7 +125,7 @@ class DemoInpaint:
             negative=negative_cond,
             latent_image=latent_with_mask,
             start_at_step=0,
-            end_at_step=15,
+            end_at_step=phase1_steps,  # 使用计算出的第一阶段步数
             return_with_leftover_noise=False
         )[0]
         samples = result["samples"].to(device)
@@ -122,7 +134,7 @@ class DemoInpaint:
         # 生成二值化遮罩（0或1）
         binary_mask = (mask_resized >= 0.5).float()
         
-        # 构建新遮罩：白区=1.0，黑区保持第一阶段非重绘强度
+        # 构建新遮罩：非重绘区域保持第一阶段非重绘强度
         phase2_mask = binary_mask * 1.0 + (1 - binary_mask) * non_redraw_strength
         
         # 应用新遮罩到第一阶段输出
@@ -131,12 +143,12 @@ class DemoInpaint:
             phase2_mask
         )[0]
      
-        # === 第二阶段采样 (22-30步) ===
+        # === 第二阶段采样 (使用 phase2_steps) ===
         result = advanced_sampler.sample(
             model=model,
             add_noise=0.00,
             noise_seed=seed + 1,
-            steps=total_steps,
+            steps=steps,  # 总步数
             cfg=cfg,
             sampler_name=sampler_name,
             scheduler=scheduler,
@@ -144,8 +156,8 @@ class DemoInpaint:
             negative=negative_cond,
              # [!] 使用新处理的潜在变量 ------------------
             latent_image=latent_phase2,
-            start_at_step=15,
-            end_at_step=30,
+            start_at_step=phase1_steps,  # 从第一阶段结束的步数开始
+            end_at_step=steps,  # 到总步数结束
             return_with_leftover_noise=False
         )[0]
         samples = result["samples"].to(device)
