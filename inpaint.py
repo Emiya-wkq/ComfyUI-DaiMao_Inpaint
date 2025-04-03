@@ -84,10 +84,11 @@ class DemoInpaint:
 
         if is_flux_model:
             sampler_name = "euler"
-            scheduler = 3  # 保持原有调度器设置
+            # scheduler = 3  # 保持原有调度器设置
+            scheduler = 'sgm_uniform'
         else:
-            sampler_name = "dpmpp_2m_sde"
-            scheduler = "karras"  # 使用karras调度器
+            sampler_name = "uni_pc"
+            scheduler = 'karras'  # 使用karras调度器
 
         
         # 编码图像到潜在空间
