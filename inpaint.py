@@ -50,9 +50,9 @@ class DemoInpaint:
                     "display_name": "画质修复"
                 }),
                 # 新增用户选择参数
-                "use_flux_config": (["enable", "disable"], {
-                    "default": "disable",
-                    "display_name": "使用Flux配置"
+                "base_model_type": (["flux", "sd35", "xl&15"], {
+                    "default": "flux",
+                    "display_name": "基础模型类型"
                 }),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
             }
@@ -63,8 +63,13 @@ class DemoInpaint:
     CATEGORY = "custom_nodes"
 
     def execute(self, model, vae, image, mask, positive_cond, negative_cond,
-                non_redraw_strength, redraw_strength, steps, quality_fix, seed, cfg, use_flux_config):
-        
+                non_redraw_strength, redraw_strength, steps, quality_fix, seed, cfg, base_model_type):
+         # 当选择sd35时对负面条件做零化处理
+        if base_model_type == "sd35":
+            from nodes import ConditioningZeroOut
+            zero_out = ConditioningZeroOut()
+            
+            negative_cond = zero_out.zero_out(negative_cond)[0]
         # 固定参数设置
         sampler_name = 0  # euler
         scheduler = 3     # 调度器类型
@@ -79,17 +84,17 @@ class DemoInpaint:
         
         # 动态参数设置
         model_name = getattr(model, 'name', '').lower()
-        # 动态参数设置（根据用户选择）
-        is_flux_model = (use_flux_config == "enable")
 
-        if is_flux_model:
+        if base_model_type == "flux":
             sampler_name = "euler"
             # scheduler = 3  # 保持原有调度器设置
             scheduler = 'sgm_uniform'
-        else:
+        elif base_model_type == "xl&15":
             sampler_name = "uni_pc"
             scheduler = 'karras'  # 使用karras调度器
-
+        else:
+            sampler_name = "dpmpp_2m"
+            scheduler = 'sgm_uniform'
         
         # 编码图像到潜在空间
         from nodes import VAEEncode

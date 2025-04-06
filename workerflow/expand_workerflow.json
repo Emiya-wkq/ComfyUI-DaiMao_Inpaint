@@ -1,0 +1,1251 @@
+{
+  "id": "34d806a9-bdc2-4024-a45c-547df980e6ed",
+  "revision": 0,
+  "last_node_id": 344,
+  "last_link_id": 721,
+  "nodes": [
+    {
+      "id": 4,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        45.55842208862305,
+        201.02122497558594
+      ],
+      "size": [
+        269.85931396484375,
+        98
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "模型",
+          "name": "MODEL",
+          "shape": 3,
+          "type": "MODEL",
+          "slot_index": 0,
+          "links": [
+            690
+          ]
+        },
+        {
+          "label": "CLIP",
+          "name": "CLIP",
+          "shape": 3,
+          "type": "CLIP",
+          "links": []
+        },
+        {
+          "label": "VAE",
+          "name": "VAE",
+          "shape": 3,
+          "type": "VAE",
+          "slot_index": 2,
+          "links": [
+            605,
+            695
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "SD3.5/sd3.5_large.safetensors"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        929.002197265625,
+        -211.68763732910156
+      ],
+      "size": [
+        342.8335266113281,
+        177.20867919921875
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "CLIP",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 693
+        },
+        {
+          "label": "文本",
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": 711
+        },
+        {
+          "label": "文本",
+          "name": "text",
+          "type": "STRING",
+          "widget": {
+            "name": "text"
+          },
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "条件",
+          "name": "CONDITIONING",
+          "shape": 3,
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            681,
+            715
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "city,street",
+        true
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 50,
+      "type": "PreviewImage",
+      "pos": [
+        1790.814208984375,
+        -272.365234375
+      ],
+      "size": [
+        763.44384765625,
+        1045.734130859375
+      ],
+      "flags": {},
+      "order": 20,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "图像",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 641
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 71,
+      "type": "CLIPTextEncode",
+      "pos": [
+        918.0264892578125,
+        55.581268310546875
+      ],
+      "size": [
+        351.8130798339844,
+        195.57545471191406
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "CLIP",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 694
+        }
+      ],
+      "outputs": [
+        {
+          "label": "条件",
+          "name": "CONDITIONING",
+          "shape": 3,
+          "type": "CONDITIONING",
+          "slot_index": 0,
+          "links": [
+            716
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "",
+        true
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    },
+    {
+      "id": 301,
+      "type": "LoadImage",
+      "pos": [
+        -1238.4810791015625,
+        362.3383483886719
+      ],
+      "size": [
+        337.89556884765625,
+        412.3165283203125
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "图像",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            606,
+            627,
+            702
+          ]
+        },
+        {
+          "label": "遮罩",
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            628
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "换脸后_00054_.png",
+        "image",
+        ""
+      ]
+    },
+    {
+      "id": 308,
+      "type": "LayerUtility: ImageScaleByAspectRatio V2",
+      "pos": [
+        -847.1069946289062,
+        408.9702453613281
+      ],
+      "size": [
+        336,
+        330
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "图像",
+          "name": "image",
+          "shape": 7,
+          "type": "IMAGE",
+          "link": 627
+        },
+        {
+          "label": "遮罩",
+          "name": "mask",
+          "shape": 7,
+          "type": "MASK",
+          "link": 628
+        }
+      ],
+      "outputs": [
+        {
+          "label": "图像",
+          "name": "image",
+          "type": "IMAGE",
+          "slot_index": 0,
+          "links": [
+            657,
+            710
+          ]
+        },
+        {
+          "label": "遮罩",
+          "name": "mask",
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "label": "原始大小",
+          "name": "original_size",
+          "type": "BOX",
+          "links": null
+        },
+        {
+          "label": "width",
+          "name": "width",
+          "type": "INT",
+          "links": null
+        },
+        {
+          "label": "height",
+          "name": "height",
+          "type": "INT",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LayerUtility: ImageScaleByAspectRatio V2"
+      },
+      "widgets_values": [
+        "original",
+        1,
+        1,
+        "letterbox",
+        "lanczos",
+        "8",
+        "longest",
+        1024,
+        "#000000"
+      ],
+      "color": "rgba(38, 73, 116, 0.7)"
+    },
+    {
+      "id": 311,
+      "type": "GrowMask",
+      "pos": [
+        -118.56901550292969,
+        431.4267578125
+      ],
+      "size": [
+        248.74363708496094,
+        82
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "遮罩",
+          "name": "mask",
+          "type": "MASK",
+          "link": 686
+        }
+      ],
+      "outputs": [
+        {
+          "label": "遮罩",
+          "name": "MASK",
+          "type": "MASK",
+          "slot_index": 0,
+          "links": [
+            649,
+            670,
+            719
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "GrowMask"
+      },
+      "widgets_values": [
+        5,
+        true
+      ]
+    },
+    {
+      "id": 316,
+      "type": "呆毛Demo_Inpainting",
+      "pos": [
+        1395.2825927734375,
+        -219.2224578857422
+      ],
+      "size": [
+        315,
+        538
+      ],
+      "flags": {},
+      "order": 19,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "model",
+          "name": "model",
+          "type": "MODEL",
+          "link": 691
+        },
+        {
+          "label": "vae",
+          "name": "vae",
+          "type": "VAE",
+          "link": 696
+        },
+        {
+          "label": "image",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 674
+        },
+        {
+          "label": "mask",
+          "name": "mask",
+          "type": "MASK",
+          "link": 720
+        },
+        {
+          "label": "positive_cond",
+          "name": "positive_cond",
+          "type": "CONDITIONING",
+          "link": 715
+        },
+        {
+          "label": "negative_cond",
+          "name": "negative_cond",
+          "type": "CONDITIONING",
+          "link": 716
+        }
+      ],
+      "outputs": [
+        {
+          "label": "IMAGE",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            641
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "呆毛Demo_Inpainting"
+      },
+      "widgets_values": [
+        4.5,
+        0.10000000000000002,
+        0.7000000000000002,
+        50,
+        false,
+        "sd35",
+        746381391270380,
+        "randomize"
+      ]
+    },
+    {
+      "id": 322,
+      "type": "ImagePadForOutpaint",
+      "pos": [
+        -475.5186767578125,
+        411.8469543457031
+      ],
+      "size": [
+        315,
+        174
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "图像",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 657
+        }
+      ],
+      "outputs": [
+        {
+          "label": "图像",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            671
+          ]
+        },
+        {
+          "label": "遮罩",
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            686
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImagePadForOutpaint"
+      },
+      "widgets_values": [
+        304,
+        0,
+        304,
+        0,
+        0
+      ]
+    },
+    {
+      "id": 325,
+      "type": "INPAINT_InpaintWithModel",
+      "pos": [
+        -121.54544067382812,
+        572.1448974609375
+      ],
+      "size": [
+        317.4000244140625,
+        142
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "局部重绘模型",
+          "name": "inpaint_model",
+          "type": "INPAINT_MODEL",
+          "link": 673
+        },
+        {
+          "label": "图像",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 671
+        },
+        {
+          "label": "遮罩",
+          "name": "mask",
+          "type": "MASK",
+          "link": 670
+        },
+        {
+          "label": "放大模型(可选)",
+          "name": "optional_upscale_model",
+          "shape": 7,
+          "type": "UPSCALE_MODEL",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "图像",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            674
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "INPAINT_InpaintWithModel"
+      },
+      "widgets_values": [
+        1001068728467278,
+        "randomize"
+      ]
+    },
+    {
+      "id": 327,
+      "type": "INPAINT_LoadInpaintModel",
+      "pos": [
+        -489.9243469238281,
+        649.915283203125
+      ],
+      "size": [
+        315,
+        58
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "局部重绘模型",
+          "name": "INPAINT_MODEL",
+          "type": "INPAINT_MODEL",
+          "links": [
+            673
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "INPAINT_LoadInpaintModel"
+      },
+      "widgets_values": [
+        "MAT_Places512_G_fp16.safetensors"
+      ]
+    },
+    {
+      "id": 332,
+      "type": "Reroute",
+      "pos": [
+        735.3145751953125,
+        119.011962890625
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "",
+          "name": "",
+          "type": "*",
+          "link": 690
+        }
+      ],
+      "outputs": [
+        {
+          "label": "",
+          "name": "",
+          "type": "MODEL",
+          "links": [
+            691
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 333,
+      "type": "Reroute",
+      "pos": [
+        739.4957885742188,
+        157.89796447753906
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "",
+          "name": "",
+          "type": "*",
+          "link": 721
+        }
+      ],
+      "outputs": [
+        {
+          "label": "",
+          "name": "",
+          "type": "CLIP",
+          "links": [
+            693,
+            694
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 334,
+      "type": "Reroute",
+      "pos": [
+        739.4957885742188,
+        195.52964782714844
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "",
+          "name": "",
+          "type": "*",
+          "link": 695
+        }
+      ],
+      "outputs": [
+        {
+          "label": "",
+          "name": "",
+          "type": "VAE",
+          "links": [
+            696
+          ]
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 336,
+      "type": "TripleCLIPLoader",
+      "pos": [
+        40.98588180541992,
+        55.635013580322266
+      ],
+      "size": [
+        278.3705139160156,
+        106
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            721
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "TripleCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_g.safetensors",
+        "clip_l.safetensors",
+        "t5xxl_fp8_e4m3fn.safetensors"
+      ]
+    },
+    {
+      "id": 337,
+      "type": "UNETLoader",
+      "pos": [
+        35.418701171875,
+        -232.9353485107422
+      ],
+      "size": [
+        284.02362060546875,
+        90.080810546875
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "模型",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "flux/flux1-dev.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 338,
+      "type": "DualCLIPLoader",
+      "pos": [
+        40.70881271362305,
+        -108.28167724609375
+      ],
+      "size": [
+        276.6734924316406,
+        127.8801498413086
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": []
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "clip_l.safetensors",
+        "t5xxl_fp8_e4m3fn.safetensors",
+        "flux",
+        "default"
+      ]
+    },
+    {
+      "id": 339,
+      "type": "PreviewImage",
+      "pos": [
+        2577.69140625,
+        -148.2013397216797
+      ],
+      "size": [
+        411.8330383300781,
+        770.2545166015625
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "图像",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 702
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 341,
+      "type": "Florence2Run",
+      "pos": [
+        646.0294799804688,
+        426.3489685058594
+      ],
+      "size": [
+        320.2156982421875,
+        369
+      ],
+      "flags": {
+        "collapsed": true
+      },
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "图像",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 710
+        },
+        {
+          "label": "Florence2",
+          "name": "florence2_model",
+          "type": "FL2MODEL",
+          "link": 709
+        }
+      ],
+      "outputs": [
+        {
+          "label": "图像",
+          "name": "image",
+          "type": "IMAGE",
+          "links": null
+        },
+        {
+          "label": "遮罩",
+          "name": "mask",
+          "type": "MASK",
+          "links": null
+        },
+        {
+          "label": "caption",
+          "name": "caption",
+          "type": "STRING",
+          "links": [
+            711
+          ]
+        },
+        {
+          "label": "json数据",
+          "name": "data",
+          "type": "JSON",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Florence2Run"
+      },
+      "widgets_values": [
+        "",
+        "more_detailed_caption",
+        true,
+        false,
+        1024,
+        3,
+        true,
+        "",
+        197830945185032,
+        "randomize",
+        true
+      ]
+    },
+    {
+      "id": 342,
+      "type": "Florence2ModelLoader",
+      "pos": [
+        265.2171936035156,
+        405.3105163574219
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "LoRA",
+          "name": "lora",
+          "shape": 7,
+          "type": "PEFTLORA",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "label": "Florence2",
+          "name": "florence2_model",
+          "type": "FL2MODEL",
+          "links": [
+            709
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Florence2ModelLoader"
+      },
+      "widgets_values": [
+        "CogFlorence-2.1-Large",
+        "fp16",
+        "sdpa"
+      ]
+    },
+    {
+      "id": 344,
+      "type": "FeatheredMask",
+      "pos": [
+        955.3351440429688,
+        418.3278503417969
+      ],
+      "size": [
+        315,
+        82
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 4,
+      "inputs": [
+        {
+          "label": "遮罩",
+          "name": "mask",
+          "type": "MASK",
+          "link": 719
+        }
+      ],
+      "outputs": [
+        {
+          "label": "遮罩",
+          "name": "MASK",
+          "shape": 6,
+          "type": "MASK",
+          "links": [
+            720
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FeatheredMask"
+      },
+      "widgets_values": [
+        8,
+        0.1
+      ]
+    }
+  ],
+  "links": [
+    [
+      627,
+      301,
+      0,
+      308,
+      0,
+      "IMAGE"
+    ],
+    [
+      628,
+      301,
+      1,
+      308,
+      1,
+      "MASK"
+    ],
+    [
+      641,
+      316,
+      0,
+      50,
+      0,
+      "IMAGE"
+    ],
+    [
+      657,
+      308,
+      0,
+      322,
+      0,
+      "IMAGE"
+    ],
+    [
+      670,
+      311,
+      0,
+      325,
+      2,
+      "MASK"
+    ],
+    [
+      671,
+      322,
+      0,
+      325,
+      1,
+      "IMAGE"
+    ],
+    [
+      673,
+      327,
+      0,
+      325,
+      0,
+      "INPAINT_MODEL"
+    ],
+    [
+      674,
+      325,
+      0,
+      316,
+      2,
+      "IMAGE"
+    ],
+    [
+      686,
+      322,
+      1,
+      311,
+      0,
+      "MASK"
+    ],
+    [
+      690,
+      4,
+      0,
+      332,
+      0,
+      "*"
+    ],
+    [
+      691,
+      332,
+      0,
+      316,
+      0,
+      "MODEL"
+    ],
+    [
+      693,
+      333,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      694,
+      333,
+      0,
+      71,
+      0,
+      "CLIP"
+    ],
+    [
+      695,
+      4,
+      2,
+      334,
+      0,
+      "*"
+    ],
+    [
+      696,
+      334,
+      0,
+      316,
+      1,
+      "VAE"
+    ],
+    [
+      702,
+      301,
+      0,
+      339,
+      0,
+      "IMAGE"
+    ],
+    [
+      709,
+      342,
+      0,
+      341,
+      1,
+      "FL2MODEL"
+    ],
+    [
+      710,
+      308,
+      0,
+      341,
+      0,
+      "IMAGE"
+    ],
+    [
+      711,
+      341,
+      2,
+      6,
+      1,
+      "STRING"
+    ],
+    [
+      715,
+      6,
+      0,
+      316,
+      4,
+      "CONDITIONING"
+    ],
+    [
+      716,
+      71,
+      0,
+      316,
+      5,
+      "CONDITIONING"
+    ],
+    [
+      719,
+      311,
+      0,
+      344,
+      0,
+      "MASK"
+    ],
+    [
+      720,
+      344,
+      0,
+      316,
+      3,
+      "MASK"
+    ],
+    [
+      721,
+      336,
+      0,
+      333,
+      0,
+      "*"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "Group",
+      "bounding": [
+        233.56161499023438,
+        323.4483642578125,
+        1075.044921875,
+        446.830322265625
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "Group",
+      "bounding": [
+        353.95306396484375,
+        -303.2354431152344,
+        955.2122192382812,
+        615.5038452148438
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "Group",
+      "bounding": [
+        -865.6002807617188,
+        327.43438720703125,
+        1081.42919921875,
+        438.01898193359375
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "Group",
+      "bounding": [
+        7.520368576049805,
+        -303.086181640625,
+        329.9651184082031,
+        613.8326416015625
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "Group",
+      "bounding": [
+        1332.534423828125,
+        -303.4403381347656,
+        441.7217102050781,
+        1076.2337646484375
+      ],
+      "color": "#3f789e",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.37190082644628114,
+      "offset": [
+        1199.8039688416288,
+        550.806967903945
+      ]
+    },
+    "ue_links": []
+  },
+  "version": 0.4
+}
